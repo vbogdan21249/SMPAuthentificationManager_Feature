@@ -19,7 +19,7 @@ public class AuthenticationManager {
     }
 
     public boolean authenticateUser(String username, String password) {
-        if (users.containsKey(username) && users.get(username).equals(password)) {
+        if (isValidCredentials(username, password)) {
             loggedInUsers.add(username);
             return true;
         }
@@ -32,5 +32,9 @@ public class AuthenticationManager {
 
     public boolean isUserLoggedIn(String username) {
         return loggedInUsers.contains(username);
+    }
+
+    private boolean isValidCredentials(String username, String password) {
+        return users.containsKey(username) && users.get(username).equals(password);
     }
 }
