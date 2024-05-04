@@ -1,12 +1,14 @@
 package org.vb2.socialmediaplatform.service;
 
+import org.vb2.socialmediaplatform.models.User;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class AuthenticationManager {
-    private final Map<String, String> users; // Map of username and password
+    private final Map<String, User> users; // Map of username and user object
     private final Set<String> loggedInUsers; // Set of currently logged-in users
 
     public AuthenticationManager() {
@@ -15,7 +17,7 @@ public class AuthenticationManager {
     }
 
     public void registerUser(String username, String password) {
-        users.put(username, password);
+        users.put(username, new User(username, password));
     }
 
     public boolean authenticateUser(String username, String password) {
@@ -35,6 +37,7 @@ public class AuthenticationManager {
     }
 
     private boolean isValidCredentials(String username, String password) {
-        return users.containsKey(username) && users.get(username).equals(password);
+        User user = users.get(username);
+        return user != null && user.getPassword().equals(password);
     }
 }
