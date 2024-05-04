@@ -13,6 +13,7 @@ public class AuthenticationManagerTest {
     public void setUp() {
         authManager = new AuthenticationManager();
         authManager.registerUser("testUser", "password");
+        authManager.authenticateUser("testUser", "password");
     }
 
     @Test
